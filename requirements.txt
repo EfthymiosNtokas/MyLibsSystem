@@ -1,0 +1,7 @@
+Flask==2.3.1
+Flask_Mail==0.9.1
+mariadb==1.1.6
+Requests==2.31.0
+selenium==4.9.1
+webdriver_manager==3.8.6
+Werkzeug==2.3.1
