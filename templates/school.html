@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<div class="container text-center">
+  <h2>Edit School</h2>
+  <div class="row justify-content-md-center">
+    <div class="col">
+
+    </div>
+    <div class="col-md-auto">
+
+      <form action="/school/{{x['school_id']}}" method="POST" enctype="multipart/form-data">
+       
+
+
+        <div class="form-group">
+          <label for="school_name">Name:</label>
+          <input required type="text" maxlength="45" name="school_name" value="{{x['school_name']}}" class="form-control"
+            id="school_name">
+        </div>
+        <div class="form-group">
+          <label for="school_address">Address:</label>
+          <input required type="address" maxlength="45" name="school_address" value="{{x['school_address']}}" class="form-control"
+            id="school_address">
+        </div>
+
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input required type="city" maxlength="45" name="city" value="{{x['city']}}" class="form-control"
+              id="city">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="number" maxlength="20" name="phone" value="{{x['phone']}}" class="form-control"
+              id="phone">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" maxlength="50" name="email" value="{{x['email']}}" class="form-control"
+              id="email">
+        </div>
+
+        <div class="form-group">
+          <label for="principal_first_name">Principal First Name:</label>
+          <input required type="text" maxlength="45" name="principal_first_name" value="{{x['principal_first_name']}}" class="form-control"
+            id="principal_first_name">
+        </div>
+        <div class="form-group">
+          <label for="principal_last_name">Principal Last Name:</label>
+          <input required type="text" maxlength="45" name="principal_last_name" value="{{x['principal_last_name']}}" class="form-control"
+            id="principal_last_name">
+        </div>
+       
+        <input type="submit" value="Submit changes" class="btn btn-primary" style="margin-top: 2rem">
+      </form>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <a href='/schools'>Back</a><br>
+</div>

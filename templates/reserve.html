@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <div style="padding-top: 2rem">
+        {% if reserved == True %}
+        {% if session['member_type'] == 'MANAGER' %}
+        <p>Successfully reserved book {{isbn}} on behalf of user {{username}}</p>
+        {% else %}
+        <p>Successfully reserved book {{isbn}}</p>
+        {% endif %}
+        {% else %}
+        <p>Could not reserve book. Explanation: {{err}}</p>
+        {% endif %}
+
+        {% if session['user_type'] == 'MEMBER' %}
+        <p><a href="/reservations" class="btn btn-primary">Go to reservations</a></p>
+        {% endif %}
+
+        <p><a href="/books" class="btn btn-primary">Back to books</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/bootstrap.js"></script>
+</body>
+
+</html>

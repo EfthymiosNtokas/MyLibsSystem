@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Category Statistics</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h2>Book category authors and teacher borrows for that category in the last year</h2>
+
+      <!-- Category selection -->
+      <div class="form-group">
+        <label for="category">Select Category:</label>
+        <select id="category" name="category" class="form-control">
+          {% for category in categories %}
+          <option value="{{ category }}">{{ category }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Search button -->
+      <br>
+      <button id="searchBtn" class="btn btn-primary">Search</button><br><br>
+
+      <!-- Author table -->
+      <div id="authorTable" class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Author</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for author in authors %}
+            <tr>
+              <td>{{ author[0] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div><br><br>
+
+      <!-- Teacher table -->
+      <div id="teacherTable" class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Teacher</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for teacher in teachers %}
+            <tr>
+              <td>{{ teacher[0] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Function to execute the queries and display results
+        function executeQueries() {
+          var category = $('#category').val(); // Updated ID to 'category'
+
+          // Make AJAX requests to fetch author and teacher results
+          $.ajax({
+            url: '/query_3_1_2',
+            type: 'POST',
+            data: { category: category },
+            success: function(response) {
+              // Generate the author table
+              var authorsHtml = '<table class="table"><thead><tr><th>Author</th></tr></thead><tbody>';
+              for (var i = 0; i < response.authors.length; i++) {
+                authorsHtml += '<tr><td>' + response.authors[i].author_name + '</td></tr>';
+              }
+              authorsHtml += '</tbody></table>';
+              $('#authorTable').html(authorsHtml);
+
+              // Generate the teacher table
+              var teachersHtml = '<table class="table"><thead><tr><th>Teacher</th></tr></thead><tbody>';
+              for (var j = 0; j < response.teachers.length; j++) {
+                teachersHtml += '<tr><td>' + response.teachers[j].teacher_name + '</td></tr>';
+              }
+              teachersHtml += '</tbody></table>';
+              $('#teacherTable').html(teachersHtml);
+            },
+            error: function() {
+              alert('An error occurred while fetching results.');
+            }
+          });
+        }
+
+        // Attach event listener to the 'Search' button
+        $('#searchBtn').click(function() {
+          executeQueries();
+        });
+      });
+    </script>
+
+    <p class="text-center"><a href="/stats">Back</a></p>
+  </div>
+
+  <script src="/static/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

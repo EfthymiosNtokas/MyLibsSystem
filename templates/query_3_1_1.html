@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h2>Total borrows per school and per month/year</h2>
+
+      <!-- Year selection -->
+      <div class="form-group">
+        <label for="year">Select Year:</label>
+        <select id="year" class="form-control">
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
+
+      <!-- Month selection -->
+      <div class="form-group">
+        <label for="month">Select Month:</label>
+        <select id="month" class="form-control">
+          <option value="Whole Year">Whole Year</option>
+          <option value=1>January</option>
+          <option value=2>February</option>
+          <option value=3>March</option>
+          <option value=4>April</option>
+          <option value=5>May</option>
+          <option value=6>June</option>
+          <option value=7>July</option>
+          <option value=8>August</option>
+          <option value=9>September</option>
+          <option value=10>October</option>
+          <option value=11>November</option>
+          <option value=12>December</option>
+        </select>
+      </div>
+      <br>
+      <!-- Search button -->
+      <button id="searchBtn" class="btn btn-primary">Search</button><br><br>
+
+      <!-- Loan statistics table -->
+      <div id="loanTable" class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Total Borrowed</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for loan_stat in loan_stats %}
+            <tr>
+              <td>{{ loan_stat[0] }}</td>
+              <td>{{ loan_stat[1] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Function to execute the query and display results
+        function executeQuery() {
+          var year = $('#year').val(); // Get the selected year
+          var month = $('#month').val(); // Get the selected month
+
+          // Make an AJAX request to fetch loan statistics
+          $.ajax({
+            url: '/query_3_1_1',
+            type: 'POST',
+            data: { year: year, month: month },
+            success: function(response) {
+              // Generate the loan statistics table
+              var html = '<table class="table"><thead><tr><th>School</th><th>Total Borrowed</th></tr></thead><tbody>';
+              for (var i = 0; i < response.length; i++) {
+                html += '<tr><td>' + response[i].school_name + '</td><td>' + response[i].total_borrowed + '</td></tr>';
+              }
+              html += '</tbody></table>';
+              $('#loanTable').html(html);
+            },
+            error: function() {
+              alert('An error occurred while fetching loan statistics.');
+            }
+          });
+        }
+
+        // Attach event listener to the 'Search' button
+        $('#searchBtn').click(function() {
+          executeQuery();
+        });
+      });
+    </script>
+
+    <p class="text-center"><a href="/stats">Back</a></p>
+  </div>
+
+  <script src="/static/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

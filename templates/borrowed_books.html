@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+<center>
+    <h2 style="font-weight:normal">Books you have borrowed</h2>
+    <table border=1 class="table">
+    <thead>
+        <tr>
+        <th>Book title</th>
+        <th>ISBN</th>
+        <th>See details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for x in books %}
+        <tr>
+        <td>{{ x['ISBN'] }}</td>
+        <td>{{ x['title'] }}</td>
+        <td><button type="button" onclick="window.location='/book/{{x['ISBN']}}'" class="btn btn-outline-primary">See details</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <a href='/index'>Back</a><br>
+  </center>
+  

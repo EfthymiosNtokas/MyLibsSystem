@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col">
+
+      </div>
+      <div class="col-md-auto">
+        <div class="mt-5">
+          <p>Welcome {{username}}!</p>
+          <div class="d-grid">
+            <a href="{{ url_for('books') }}" class="btn btn-outline-primary">Books</a><br>
+            <a href="{{ url_for('reviews') }}" class="btn btn-outline-primary">See Pending Book Reviews</a><br>
+            <a href="{{ url_for('reviews_all') }}" class="btn btn-outline-primary">See All Book Reviews</a><br>
+            <a href="{{ url_for('borrows') }}" class="btn btn-outline-primary">Borrows</a><br>
+            <a href="{{ url_for('reservations') }}" class="btn btn-outline-primary">Reservations</a><br>
+            <a href="/requests" class="btn btn-outline-primary">See member requests</a><br>
+            <a href="{{ url_for('profile') }}" class="btn btn-outline-primary">Profile</a><br>
+            <a href="{{ url_for('profiles') }}" class="btn btn-outline-primary">Profiles</a><br>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+</body>

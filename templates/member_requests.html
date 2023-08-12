@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+<center>
+    <h2 style="font-weight: normal">See pending member requests</h2>
+    <form action="/requests" method="POST">
+      <table border=1 class="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>User Type</th>
+            <th>Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in requests %}
+          <tr>
+            <td>{{ x['username'] }}</td>
+            <td>{{ x['email'] }}</td>
+            <td>{{ x['name'] }}</td>
+            <td>{{ x['date_of_birth'] }}</td>
+            <td>{{ x['user_type'] }}</td>
+            <td><input type="submit" name="accept_{{ x['email'] }}" value="Accept" class="btn btn-success"> <input type="submit" name="reject_{{ x['email'] }}" value="Reject" class="btn btn-danger"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form><br>
+    <a href='/index'>Back</a><br>
+  </center>

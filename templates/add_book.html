@@ -1,0 +1,222 @@
+{% block body %}
+
+<head>
+    <script>
+        function remove_element(parent_div, child_p) {
+            parent_div.removeChild(child_p)
+        }
+
+        function add_author() {
+            const new_author = document.createElement("p");
+
+            const node = document.createTextNode("First name: ");
+            new_author.appendChild(node);
+            const input_field = document.createElement("input");
+            input_field.type = "text";
+            input_field.name = "author_first_names"
+            input_field.attributes["required"] = "";
+            input_field.attributes["maxlength"] = 45;
+            new_author.appendChild(input_field);
+
+            const node2 = document.createTextNode(" Last name: ");
+            new_author.appendChild(node2);
+            const input_field2 = document.createElement("input");
+            input_field2.style.paddingRight = "3px";
+            input_field2.type = "text";
+            input_field2.name = "author_last_names"
+            input_field2.attributes["required"] = "";
+            input_field2.attributes["maxlength"] = 45;
+            new_author.appendChild(input_field2);
+
+            const remove_button = document.createElement("button");
+            remove_button.type = "button";
+            remove_button.className = "btn btn-outline-primary";
+            remove_button.innerHTML = "Remove author";
+            remove_button.onclick = (e) => {
+                remove_element(e.target.parentElement.parentElement, e.target.parentElement);
+            };
+            new_author.appendChild(remove_button);
+
+            new_author.appendChild(document.createElement("br"));
+            
+            const authors_menu = document.getElementById("the_authors");
+            authors_menu.appendChild(new_author);
+        }
+
+        function add_category() {
+            const new_category = document.createElement("p");
+
+            const node = document.createTextNode("Category name:");
+            new_category.appendChild(node);
+            const input_field = document.createElement("input");
+            input_field.style.paddingRight = "3px";
+            input_field.type = "text";
+            input_field.name = "category_names";
+            input_field.attributes["required"] = "";
+            input_field.attributes["maxlength"] = 50;
+            new_category.appendChild(input_field);
+
+            const remove_button = document.createElement("button");
+            remove_button.className = "btn btn-outline-primary";
+            remove_button.type = "button";
+            remove_button.innerHTML = "Remove category";
+            remove_button.onclick = (e) => {
+                remove_element(e.target.parentElement.parentElement, e.target.parentElement);
+            };
+            new_category.appendChild(remove_button);
+
+            new_category.appendChild(document.createElement("br"));
+            
+            const categories_menu = document.getElementById("the_categories");
+            categories_menu.appendChild(new_category);
+        }
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MyLibs</title>
+    <link href="\static\css\bootstrap.css" rel="stylesheet">
+</head>
+
+<div class="">
+    <form action="/add_book" method="POST" enctype="multipart/form-data">
+        <div class="row" style="padding: 17px">
+            <div class="col-4">
+                <h2>Add a new book to the system</h2>
+            </div>
+
+            <div class="col-1">
+                <input type="submit" value="Add book" class="btn btn-primary mb-3">
+            </div>
+
+            <div class="col-2">
+                <button type="button" onclick="window.location='/index'" class="btn btn-primary mb-3">Back to index</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>ISBN:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <input required type="text" name="isbn">
+                    </div>
+                </div>
+        
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>Title:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <input required type="text" maxlength="80" name="title">
+                    </div>
+                </div>
+        
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>Publisher:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <input required type="text" maxlength="80" name="publisher">
+                    </div>
+                </div>
+        
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>Pages:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <input required type="text" name="pages">
+                    </div>
+                </div>
+        
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>Language:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <input required type="text" maxlength="50" name="language">
+                    </div>
+                </div>
+        
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>Keywords:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <input type="text" maxlength="100" name="keywords">
+                    </div>
+                </div>
+        
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>Summary:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <textarea maxlength="2000" name="summary" style="width: 200px; height: 200px"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>Cover:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <input type="file" name="cover">
+                    </div>
+                </div>
+        
+                <div class="row" style="padding: 17px">
+                    <div class="col-3">
+                        <b>Copies in your school:</b>
+                    </div>
+        
+                    <div class="col-4">
+                        <input type="number" name="copies"></p>
+                    </div>
+                </div>
+
+                <div class="row" id="authors-title" style="padding: 17px">
+                    <b>Authors</b>
+                </div>
+
+                <div class="row" id="the_authors" style="padding: 17px">
+                    
+                </div>
+
+                <div class="row" id="authors-add" style="padding: 17px">
+                    <div class="col-3">
+                        <button type="button" onclick="add_author();"  class="btn btn-outline-primary">Add author</button>                    
+                    </div>
+                </div>
+
+                <div class="row" id="categories-title" style="padding: 17px">
+                    <b>Categories</b>
+                </div>
+
+                <div class="row" id="the_categories" style="padding: 17px">
+                    
+                </div>
+
+                <div class="row" id="categories-add" style="padding: 17px">
+                    <div class="col-3">
+                        <button type="button" onclick="add_category()"  class="btn btn-outline-primary">Add Category</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

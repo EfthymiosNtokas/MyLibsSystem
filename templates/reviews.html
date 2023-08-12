@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+<center>
+    <h2 style="font-weight: normal">See pending member book reviews</h2>
+    <form action="/reviews" method="POST">
+      <table border=1 class="table">
+        <thead>
+          <tr>
+            <th>ISBN</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Membertype</th>
+            <th>Rating</th>
+            <th>Review_Body</th>
+            <th>Accept</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in reviews %}
+          <tr>
+            <td>{{ x['isbn'] }}</td>
+            <td>{{ x['username'] }}</td>
+            <td>{{ x['name'] }}</td>
+            <td>{{ x['usertype'] }}</td>
+            <td>{{ x['rating'] }}</td>
+            <td>{{ x['review_body'] }}</td>
+            <td><input type="submit" name="accept_{{ x['review_id'] }}" value="Accept" class="btn btn-success"> <input type="submit" name="reject_{{ x['review_id'] }}" value="Reject" class="btn btn-danger"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form><br>
+    <a href='/index'>Back</a><br>
+  </center>
+  

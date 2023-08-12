@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+{% if session['user_type']=='MANAGER' %}
+<div class="container text-center">
+  <h2>Edit profile</h2>
+  <div class="row justify-content-md-center">
+    <div class="col">
+
+    </div>
+    <div class="col-md-auto">
+
+      <form action="/profileof/{{x['username']}}" method="POST" enctype="multipart/form-data">
+        
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input required type="text" maxlength="50" name="username" value="{{x['username']}}" class="form-control"
+            id="username">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input required type="email" maxlength="50" name="email" value="{{x['email']}}" class="form-control"
+            id="email">
+        </div>
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input required type="text" maxlength="50" name="first_name" value="{{x['first_name']}}" class="form-control"
+            id="firstName">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input required type="text" maxlength="50" name="last_name" value="{{x['last_name']}}" class="form-control"
+            id="lastName">
+        </div>
+        <div class="form-group">
+          <label for="dateOfBirth">Date Of Birth:</label>
+          <input required type="date" name="date_of_birth" value="{{x['date_of_birth']}}" class="form-control"
+            id="dateOfBirth">
+        </div>
+
+        <div class="form-group">
+        <label for="yesNoInput">Active:</label>
+        <select id="yesNoInput" name="yesNoInput" class="form-control">
+          {%if x['is_active'] == 1 %}
+
+          <option value="yes" selected>Yes</option>
+          <option value="no"> No</option>
+
+          {%else%}
+          <option value="yes">Yes</option>
+          <option value="no" selected> No</option>
+          {%endif%}
+        </select>
+        </div>
+        <div class="form-group">
+        <label for="membertype">Membertype:</label>
+        <select id="membertype" name="membertype" class="form-control">
+
+          {%if x['user_type'] == 'TEACHER' %}
+
+          <option value="TEACHER" selected>TEACHER</option>
+          <option value="STUDENT"> STUDENT</option>
+
+          {%else%}
+          <option value="TEACHER">TEACHER</option>
+          <option value="STUDENT" selected>STUDENT</option>
+          {%endif%}
+
+        </select>
+      </div>
+        <div class="form-group">
+          <label for="school">School:</label>
+          <input class="form-control" type="text" placeholder="{{x['school_name']}}" disabled>
+
+        </div>
+
+
+        <input type="submit" value="Submit changes" class="btn btn-primary" style="margin-top: 2rem">
+        <input type="submit" name="delete_user" value="Delete user" class="btn btn-outline-danger" style="margin-top: 2rem">
+      </form>
+
+
+
+
+
+
+
+
+    </div>
+      <div class="col">
+        
+      </div>
+
+      </div>
+    </form>
+    <a href='/profiles'>Back</a><br>
+  </div>
+  
+</div>
+{% else %}
+<div class="container text-center">
+  <h2>Edit profile</h2>
+  <div class="row justify-content-md-center">
+    <div class="col">
+
+    </div>
+    <div class="col-md-auto">
+
+      <form action="/profileof/{{x['username']}}" method="POST" enctype="multipart/form-data">
+        
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input required type="text" maxlength="50" name="username" value="{{x['username']}}" class="form-control"
+            id="username" disabled>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input required type="email" maxlength="50" name="email" value="{{x['email']}}" class="form-control"
+            id="email" disabled>
+        </div>
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input required type="text" maxlength="50" name="first_name" value="{{x['first_name']}}" class="form-control"
+            id="firstName" disabled>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input required type="text" maxlength="50" name="last_name" value="{{x['last_name']}}" class="form-control"
+            id="lastName" disabled>
+        </div>
+        <div class="form-group">
+          <label for="dateOfBirth">Date Of Birth:</label>
+          <input required type="date" name="date_of_birth" value="{{x['date_of_birth']}}" class="form-control"
+            id="dateOfBirth" disabled>
+        </div>
+
+        <div class="form-group">
+        <label for="yesNoInput">Active:</label>
+        <select id="yesNoInput" name="yesNoInput" class="form-control">
+          {%if x['is_active'] == 1 %}
+
+          <option value="yes" selected>Yes</option>
+          <option value="no"> No</option>
+
+          {%else%}
+          <option value="yes">Yes</option>
+          <option value="no" selected> No</option>
+          {%endif%}
+        </select>
+        </div>
+        <div class="form-group">
+        <label for="membertype">Membertype:</label>
+        <select id="membertype" name="membertype" class="form-control">
+
+          
+          <option value="MANAGER" selected disabled>MANAGER</option>
+          
+
+        </select>
+      </div>
+        <div class="form-group">
+          <label for="school">School:</label>
+          <input class="form-control" type="text" placeholder="{{x['school_name']}}" disabled>
+
+        </div>
+
+
+        <input type="submit" value="Submit changes" class="btn btn-primary" style="margin-top: 2rem">
+      </form>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+  <a href='/profiles'>Back</a><br>
+</div>
+
+{% endif %}

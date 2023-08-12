@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+{% block body %}
+<center>
+<h1>Browse Schools</h1>
+<button onclick="location.href = '/index'" class="btn btn-primary mb-3">
+   Back
+   </button>
+
+</center>
+
+
+
+<center>
+<h2>Filters</h2>
+<div>
+   <form action="/schools" method="POST">
+      
+
+     <p><h3>School Name<br><input name="school_name_filter"></h3></p><br>
+     
+     <input type="submit" value="Apply filters" class="btn btn-primary">
+   </form>
+</div>
+</center>
+{% for x in schools %}
+<div style="padding: 1rem">
+<table border = 1 class="table">
+      {% for key, value in x.items()%}
+       {% if(key != 'school_id') %}
+         <tr>
+            <td> {{ key }} </td>            
+            <td>{{value}}</td>
+           
+
+         </tr>
+         {%endif%}
+      {% endfor %}
+   </table>
+   <br>
+   
+   <button type="button" onclick="window.location='/school/{{x['school_id']}}'" class="btn btn-outline-primary">Edit School</button>
+   
+ </div>
+   {% endfor %}
+
+
+</div>
+<style>
+   h1{
+      font-weight:normal;
+      
+   }
+   h2{
+      font-weight:normal;
+   }
+   h3{
+      font-weight:normal;
+   }
+   
+</style>
+{% endblock %}

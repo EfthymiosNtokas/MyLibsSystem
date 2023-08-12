@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Library Card</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+      }
+      .card {
+        width: 400px;
+        height: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        margin: 50px auto;
+        padding: 20px;
+        text-align: center;
+        background-color: #f2f2f2;
+      }
+      .card h2 {
+        margin-top: 0;
+        font-size: 32px;
+        font-weight: bold;
+        color: #3f51b5;
+      }
+      .card p {
+        margin: 10px 0;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: left;
+        color: #666;
+      }
+      .card span {
+        font-weight: normal;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Member Card</h2>
+      <p>First name: <span>{{ first_name }}</span></p>
+      <p>Last name: <span>{{ last_name }}</span></p>
+      <p>E-mail: <span>{{ email }}</span></p>
+      <p>Date of birth: <span>{{ date_of_birth }}</span></p>
+      <p>School: <span>{{ school_name }}</span></p>
+      <p>Member type: <span>{{ member_type }}</span></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MyLibs</title>
+        <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+        <div class="container text-center">
+                <div class="row justify-content-md-center">
+                        <div class="col">
+
+                        </div>
+                        <div class="col-md-auto">
+                                {% if session['user_type'] == 'STUDENT' or session['user_type'] == 'TEACHER' %}
+
+                                <h1 style="font-weight: normal">Edit Profile</h1>
+                                <form action="/profile" method="POST" enctype="multipart/form-data">
+                                        {% if session['user_type'] == 'TEACHER' %}
+                                        <div class="form-group">
+                                                <label for="username">Username:</label>
+                                                <input required type="text" maxlength="50" name="username"
+                                                        value="{{x['username']}}" class="form-control" id="username">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="email">Email:</label>
+                                                <input required type="email" maxlength="50" name="email"
+                                                        value="{{x['email']}}" class="form-control" id="email">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="firstName">First Name:</label>
+                                                <input required type="text" maxlength="50" name="first_name"
+                                                        value="{{x['first_name']}}" class="form-control" id="firstName">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="lastName">Last Name:</label>
+                                                <input required type="text" maxlength="50" name="last_name"
+                                                        value="{{x['last_name']}}" class="form-control" id="lastName">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="dateOfBirth">Date Of Birth:</label>
+                                                <input required type="date" name="date_of_birth"
+                                                        value="{{x['date_of_birth']}}" class="form-control"
+                                                        id="dateOfBirth">
+                                        </div>
+                                        
+                                        <div class ="form-group">
+                                                <label for="user-type">Usertype:</label>
+                                                <input class="form-control" type="text" placeholder="{{session['user_type']}}" disabled>
+                                                
+                                        </div>
+                                        <div class ="form-group">
+                                                <label for="school">School:</label>
+                                                <input class="form-control" type="text" placeholder="{{x['school_name']}}" disabled>
+                                                
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                                                                              
+                                                <div class ="form-group">
+                                                        <label for="username">Username:</label>
+                                                        <input class="form-control" type="text" placeholder="{{x['username']}}" disabled>
+                                                        
+                                                </div>
+                                                
+                                                <div class ="form-group">
+                                                        <label for="email">Email:</label>
+                                                        <input class="form-control" type="text" placeholder="{{x['email']}}" disabled>
+                                                        
+                                                </div>
+
+                                                <div class ="form-group">
+                                                        <label for="first-name">First Name:</label>
+                                                        <input class="form-control" type="text" placeholder="{{x['first_name']}}" disabled>
+                                                        
+                                                </div>
+
+                                                <div class ="form-group">
+                                                        <label for="last-name">Last Name:</label>
+                                                        <input class="form-control" type="text" placeholder="{{x['last_name']}}" disabled>
+                                                        
+                                                </div>
+
+                                                <div class ="form-group">
+                                                        <label for="date-of-birth">Date Of Birth:</label>
+                                                        <input class="form-control" type="text" placeholder="{{x['date_of_birth']}}" disabled>
+                                                        
+                                                </div>
+                                                
+                                                
+                                                <div class ="form-group">
+                                                        <label for="user-type">Usertype:</label>
+                                                        <input class="form-control" type="text" placeholder="{{session['user_type']}}" disabled>
+                                                        
+                                                </div>
+                                                <div class ="form-group">
+                                                        <label for="school">School:</label>
+                                                        <input class="form-control" type="text" placeholder="{{x['school_name']}}" disabled>
+                                                        
+                                                </div>
+                                        </div>
+                                        {% endif %}
+                                        <h2 style="font-weight: normal">Change Password:</h2>
+                                        <div class="form-group">
+                                                <label for="currentPassword">Current Password:</label>
+                                                <input type="password" id="currentPassword" name="current_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="newPassword">New Password:</label>
+                                                <input type="password" id="newPassword" name="new_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="confirmPassword">Confirm Password:</label>
+                                                <input type="password" id="confirmPassword" name="confirm_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+
+                                        <input type="submit" name="member_card" value="See member card" class="btn btn-primary" style="margin-top:2rem">
+                                        <input type="submit" value="Submit changes" class="btn btn-primary" style="margin-top: 2rem">
+                                </form>
+                                
+                                {% elif session['user_type'] == 'MANAGER' %}
+
+                                <h1 style="font-weight: normal">Edit Profile</h1>
+                                <form action="/profile" method="POST" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                                <label for="username">Username:</label>
+                                                <input required type="text" maxlength="50" name="username"
+                                                        value="{{x['username']}}" class="form-control" id="username">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="email">Email:</label>
+                                                <input required type="email" maxlength="50" name="email"
+                                                        value="{{x['email']}}" class="form-control" id="email">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="firstName">First Name:</label>
+                                                <input required type="text" maxlength="50" name="first_name"
+                                                        value="{{x['first_name']}}" class="form-control" id="firstName">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="lastName">Last Name:</label>
+                                                <input required type="text" maxlength="50" name="last_name"
+                                                        value="{{x['last_name']}}" class="form-control" id="lastName">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="dateOfBirth">Date Of Birth:</label>
+                                                <input required type="date" name="date_of_birth"
+                                                        value="{{x['date_of_birth']}}" class="form-control"
+                                                        id="dateOfBirth">
+                                        </div>
+                                        <div class ="form-group">
+                                                <label for="school">School:</label>
+                                                <input class="form-control" type="text" placeholder="{{x['school_name']}}" disabled>
+                                                
+                                        </div>
+                                        <h2 style="font-weight: normal">Change Password:</h2>
+                                        <div class="form-group">
+                                                <label for="currentPassword">Current Password:</label>
+                                                <input type="password" id="currentPassword" name="current_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="newPassword">New Password:</label>
+                                                <input type="password" id="newPassword" name="new_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="confirmPassword">Confirm Password:</label>
+                                                <input type="password" id="confirmPassword" name="confirm_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+                                        <input type="submit" value="Submit changes" class="btn btn-primary" style="margin-top: 2rem">
+                                </form>
+
+                                {% else %}
+
+                                <h1 style="font-weight: normal">Edit Profile</h1>
+                                <form action="/profile" method="POST" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                                <label for="username">Username:</label>
+                                                <input required type="text" maxlength="50" name="username"
+                                                        value="{{x['username']}}" class="form-control" id="username">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="email">Email:</label>
+                                                <input required type="email" maxlength="50" name="email"
+                                                        value="{{x['email']}}" class="form-control" id="email">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="firstName">First Name:</label>
+                                                <input required type="text" maxlength="50" name="first_name"
+                                                        value="{{x['first_name']}}" class="form-control" id="firstName">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="lastName">Last Name:</label>
+                                                <input required type="text" maxlength="50" name="last_name"
+                                                        value="{{x['last_name']}}" class="form-control" id="lastName">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="dateOfBirth">Date Of Birth:</label>
+                                                <input required type="date" name="date_of_birth"
+                                                        value="{{x['date_of_birth']}}" class="form-control"
+                                                        id="dateOfBirth">
+                                        </div>
+                                        <h2 style="font-weight: normal">Change Password:</h2>
+                                        <div class="form-group">
+                                                <label for="currentPassword">Current Password:</label>
+                                                <input type="password" id="currentPassword" name="current_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="newPassword">New Password:</label>
+                                                <input type="password" id="newPassword" name="new_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="confirmPassword">Confirm Password:</label>
+                                                <input type="password" id="confirmPassword" name="confirm_password"
+                                                        maxlength="20" class="form-control">
+                                        </div>
+
+                                        <input type="submit" value="Submit changes" class="btn btn-primary" style="margin-top: 2rem">
+                                </form>
+
+
+                                
+
+
+
+                                {%endif%}
+                        </div>
+                        <div class="col">
+
+                        </div>
+                </div>
+                <a href='/index'>Back</a><br>
+        </div>
+        
+</body>

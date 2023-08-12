@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <div style="padding-top: 2rem">
+        {% if borrowed == True %}
+        <p>Successfully lended item {{item_id}} (with ISBN {{isbn}}) to user {{username}}</p>
+        {% else %}
+        <p>Cannot allow user to borrow book. Explanation: {{err}}</p>
+
+        {% if priority == 1%}
+        Since there are no available copies at the moment, perhaps the user could make a reservation.
+        <form action="/reserve/{{isbn}}" method="POST">
+          <input type="hidden" name="username" value="{{username}}">
+          <input type="submit" value="Reserve">
+        </form>
+        {%endif%}
+        {% endif %}
+        <p><a href='/borrows' class="btn btn-primary">Go to borrows</a></p>
+        <p><a href='/books' class="btn btn-primary">Back to books</a></p>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/bootstrap.js"></script>
+</body>
+
+</html>

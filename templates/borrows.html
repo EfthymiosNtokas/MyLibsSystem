@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+<center>
+    {% if session['user_type'] == 'STUDENT' or session['user_type'] == 'TEACHER'%}
+    <h2 style="font-weight:normal">Your Borrows</h2>
+    <form action="/borrows" method="POST">
+        <h2 style="font-weight:normal">Filters</h2>
+        <div>
+             <input type="checkbox" name="overdue_filter" value="">Only show overdue</option><br>
+             <p>Days overdue:<br><input name="days_overdue_min_filter">-<input name="days_overdue_max_filter"></p>
+             <input type="submit" value="Apply filters" class="btn btn-primary">
+        </div>
+      <table border=1 class="table">
+        <thead>
+          <tr>
+            <th>Book title</th>
+            <th>ISBN</th>
+            <th>Date borrowed</th>
+            <th>To be returned by</th>
+            <th>Returned ?</th>
+            <th>Overdue ?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in borrows %}
+          <tr>
+            <td>{{ x['title'] }}</td>
+            <td>{{ x['ISBN'] }}</td>
+            <td>{{ x['begin_date'] }}</td>
+            <td>{{ x['end_date'] }}</td>
+            {% if x['return_date'] %}
+            <td>{{x['return_date']}}</td>
+            {% else %}
+            <td>No</td>
+            {% endif %}
+            {% if x['overdue'] > 0 and not x['return_date']%}
+            <td>Yes</td>
+            {% else %}
+            <td>No</td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form><br>
+    {% else %}
+    <h2 style="font-weight:normal">Borrows in your school</h2>
+    <form action="/borrows" method="POST">
+        <h2 style="font-weight:normal">Filters</h2>
+        <div>
+             <p>First name:<br><input name="first_name_filter"></p>
+             <p>Last name:<br><input name="last_name_filter"></p>
+             <input type="checkbox" name="overdue_filter" value="">Only show overdue</option><br>
+             <p>Days overdue:<br><input name="days_overdue_min_filter">-<input name="days_overdue_max_filter"></p>
+             <input type="submit" value="Apply filters" class="btn btn-primary">
+        </div>
+        <br>
+      <table border=1 class="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Item id</th>
+            <th>Book title</th>
+            <th>ISBN</th>
+            <th>Date borrowed</th>
+            <th>To be returned by</th>
+            <th>Returned ?</th>
+            <th>Overdue ?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in borrows %}
+          <tr>
+            <td>{{x['username']}}</td>
+            <td>{{x['first_name']}}</td>
+            <td>{{x['last_name']}}</td>
+            <td>{{x['item_id']}}</td>
+            <td>{{ x['title'] }}</td>
+            <td>{{ x['ISBN'] }}</td>
+            <td>{{ x['begin_date'] }}</td>
+            <td>{{ x['end_date'] }}</td>
+            {% if x['return_date'] %}
+            <td>{{x['return_date']}}</td>
+            {% else %}
+            <td>No</td>
+            {% endif %}
+            {% if x['overdue'] > 0 and not x['return_date']%}
+            <td>Yes</td>
+            {% else %}
+            <td>No</td>
+            {% endif %}
+            {% if not x['return_date'] %}
+            <td><input type="submit" name="return_{{ x['item_id'] }}" value="Return" class="btn btn-outline-primary"></td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form><br>
+    {% endif %}
+    <a href='/index'>Back</a><br>
+  </center>
+  

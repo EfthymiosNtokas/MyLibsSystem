@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h2>Add a School Library</h2>
+    </div>
+    <div style="padding-top: 2rem">
+      <form action="/add_school_library" method="POST">
+        <div class="form-group">
+          <label for="schoolName">School Name</label>
+          <input required type="text" name="school_name" class="form-control" id="schoolName">
+        </div>
+        <div class="form-group">
+          <label for="schoolAddress">School Address</label>
+          <input required type="text" name="school_address" class="form-control" id="schoolAddress">
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input required type="text" name="city" class="form-control" id="city">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" name="phone" class="form-control" id="phone">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+          <label for="principalFirstName">Principal First Name</label>
+          <input required type="text" name="principal_first_name" class="form-control" id="principalFirstName">
+        </div>
+        <div class="form-group">
+          <label for="principalLastName">Principal Last Name</label>
+          <input required type="text" name="principal_last_name" class="form-control" id="principalLastName">
+        </div>
+        <br><br>
+        <input type="submit" value="Register" class="btn btn-primary">
+        <br><br>
+      </form>
+    </div>
+    <div class="text-center">
+      <a href="/index" class="btn btn-link">Back</a>
+    </div>
+  </div>
+  
+  <script src="static/js/bootstrap.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+{% block body %}
+
+<head>
+<script type="text/javascript">
+   createEditableSelect(document.forms[0].myText);
+</script>
+
+<script type="text/javascript">
+   function redirect_to_book(isbn, session) {
+      alert("Doing something");
+      var data = {
+         isbn: isbn,
+         session: session,
+         redirect: "True"
+      };
+
+      var json = JSON.stringify(data);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/book/"+isbn);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(json);
+   }
+
+   function redirect_to_reserve(isbn, session) {
+      var data = {
+         isbn: "isbn",
+         session: session
+      };
+
+      var json = JSON.stringify(data);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/reserve/"+isbn);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(json);
+   }
+</script>
+
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>MyLibs</title>
+   <link href="\static\css\bootstrap.css" rel="stylesheet">
+</head>
+
+{% if session['user_type'] == 'MANAGER' %}
+<button onclick="location.href = '/add_book'" class="btn btn-primary mb-3" style="position:fixed; right: 20px; top: 20px">Add book</button>
+{% endif %}
+
+<div class="">
+   <div class="row">
+      <div class="col-2">
+         <div class="row"><h1>Browse books</h1> <button onclick="location.href = '/index'" class="btn btn-primary mb-3">
+            Back
+            </button>
+         </div>
+      </div>
+   </div>
+   <div class="row d-flex flex-row mb-3">
+      <div class="col-4">
+         <h2>Filters</h2>
+      </div>
+      <div class="col-8">
+         <h2>Results</h2>
+      </div>
+   </div>   
+   <div class="row justify-content-md-start">
+      <div class="col-4">
+         <form action="/books" method="POST">
+            <div class="row">
+               <h4>Author</h4>
+               <div data-bs-spy="scroll" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0" style="height: 300px; overflow: hidden; overflow-y:scroll;">
+                  {% for x in authors %}
+                  <input type="checkbox" name="author_filter" value="{{x['author_id']}}">{{x['author_name']}} ({{x['nbooks']}})<br>
+                  {% endfor %}
+               </div>
+            </div>
+
+            <div class="row">
+               <h4>Category</h4>
+               <div data-bs-spy="scroll" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="1" style="height: 300px; overflow: hidden; overflow-y:scroll;">
+                  {% for x in categories %}
+                  <input type="checkbox" name="category_filter" value="{{x['category_id']}}">{{x['category']}} ({{x['nbooks']}})<br>
+                  {% endfor %}
+               </div>
+            </div>
+
+            <div class="row">
+               <h4>Title</h4>
+            </div>
+
+            <div class="row">
+               <input name="title_filter">
+            </div>
+
+            <div class="row">
+               <br>
+            </div>
+
+            <div class="row">
+               <h4>Number of copies</h4>
+            </div>
+
+            <div class="row">
+               <div class="col">
+                  <input type="number" name="copies_lb_filter">
+               </div>
+
+               <div class="col-1">
+                  -
+               </div>
+
+               <div class="col">
+                  <input type="number" name="copies_ub_filter">
+               </div>
+            </div>
+
+            <div class="row">
+               <br>
+            </div>
+
+            <div class="row">
+               <h4><input type="checkbox" name="school_filter" value="school_filter" style="width: 17px; height: 17px;"> Only show books in my school<h4></h4>
+            </div>
+
+            <div class="row">
+               <div class="col-2">
+                  <input type="submit" value="Apply filters" class="btn btn-primary mb-3">
+               </div>
+            </div>
+         </form>
+      </div>
+
+      <div class="col-8">
+         {% for x in books %}
+         <div class="row">
+            <div class="col-8">
+               <h4>{{x['title']}}</h4>
+            </div>
+         </div>
+         <div class="row" style="padding: 1rem">
+            <div class="col-2">
+               <img src="{{x['cover']}}" class="img-fluid">
+            </div>
+            <div class="col-6">
+               <table border = 1 class="table">
+                  {% for key, value in x.items() %}
+                     {% if key != 'title' and key != 'cover' %}
+                     <tr>
+                        <td> {{ key }} </td>
+                        <td> {{ value }} </td>
+                     </tr>
+                     {% endif %}
+                  {% endfor %}
+               </table>
+            </div>
+            <div class="col-2">
+               <button onclick="window.location = 'book/{{x['ISBN']}}';" class="btn btn-primary mb-3 w-100">See details</button>
+               <!-- <button onclick='redirect_to_book({{x["ISBN"]}}, {{session|tojson|safe}});'>See details</button> -->
+               {% if session['user_type'] == 'MANAGER' %}
+               <button type="button" onclick="window.location='/edit_book/{{x['ISBN']}}'" class="btn btn-primary mb-3 w-100">Edit book</button>
+               {% else %}
+               <button onclick="window.location = '/reserve/{{x['ISBN']}}';" class="btn btn-primary mb-3 w-100">Reserve</button>
+               {% endif %}
+            </div>
+         </div>
+            {% endfor %}
+      </div>
+   </div>
+</div>
+{% endblock %}

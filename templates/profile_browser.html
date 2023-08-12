@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+{% block body %}
+<center>
+<h1>Browse Profiles</h1>
+<button onclick="location.href = '/index'" class="btn btn-primary mb-3">
+   Back
+   </button>
+
+</center>
+<head>
+<script type="text/javascript">
+   createEditableSelect(document.forms[0].myText);
+</script>
+
+<script type="text/javascript">
+   function redirect_to_profile(username, session) {
+      alert("Doing something");
+      var data = {
+         username: username,
+         session: session,
+         redirect: "True"
+      };
+
+      var json = JSON.stringify(data);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/profileof/"+username);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(json);
+   }
+
+</script>
+</head>
+
+
+<center>
+<h2>Filters</h2>
+<div>
+   <form action="/profiles" method="POST">
+      
+
+     <p><h3>First Name<br><input name="first_name_filter"></h3></p><br>
+     <p><h3>Last Name<br><input name="last_name_filter"></h3></p><br>
+     <p><h3>Username<br><input name="username_filter"></h3></p><br>
+     
+     <input type="submit" value="Apply filters" class="btn btn-primary">
+   </form>
+</div>
+</center>
+{% for x in profiles %}
+<div style="padding: 1rem">
+<table border = 1 class="table">
+      {% for key, value in x.items() %}
+         <tr>
+            <td> {{ key }} </td>
+            {% if value == 1 %}
+            <td>YES</td>
+            {%elif value == 0 %}
+            <td>NO</td>
+            {%else%}
+            <td>{{value}}</td>
+            {%endif%}
+
+         </tr>
+      {% endfor %}
+   </table>
+   <br>
+   
+   <button type="button" onclick="window.location='/profileof/{{x['username']}}'" class="btn btn-outline-primary">Edit Profile</button>
+   
+ </div>
+   {% endfor %}
+
+
+</div>
+<style>
+   h1{
+      font-weight:normal;
+      
+   }
+   h2{
+      font-weight:normal;
+   }
+   h3{
+      font-weight:normal;
+   }
+   
+</style>
+{% endblock %}

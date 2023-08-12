@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="\static\css\bootstrap.css" rel="stylesheet">
+</head>
+
+<center>
+<body>
+    <h1 style = "font-weight: normal">Backup/Restore your database</h1>
+    <button onclick="location.href = '/index'" class="btn btn-primary mb-3">
+      Back
+      </button>
+      <br></br>
+    <form method="POST" enctype="multipart/form-data">
+        <button type="submit" name="action" value="backup" class="btn btn-outline-primary mb-3" >Backup database</button><br></br>
+        <button type="submit" name="action" value="restore" class="btn btn-outline-primary mb-3">Restore database</button>
+        <input type="file" name="restore_from_file" accept=".sql" class="btn btn-light mb-3">
+    </form>
+</body>
+</center>
+</html>

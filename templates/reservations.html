@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+<center>
+  {% if session['user_type'] == 'STUDENT' or session['user_type'] == 'TEACHER'%}
+    <h2 style="font-weight:normal">Your reservations</h2>
+    <form action="/reservations" method="POST">
+      <table border=1 class = "table">
+        <thead>
+          <tr>
+            <th>Book title</th>
+            <th>ISBN</th>
+            <th>Date reserved</th>
+            <th>Reservation expires</th>
+            <th>Available for borrow</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in reservations %}
+          <tr>
+            <td>{{ x['title'] }}</td>
+            <td>{{ x['ISBN'] }}</td>
+            <td>{{ x['begin_date'] }}</td>
+            <td>{{ x['end_date'] }}</td>
+            <td>{{ x['borrow_available'] }}</td>
+            <td><input type="submit" name="cancel_{{ x['ISBN'] }}" value="Cancel" class="btn btn-outline-danger"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form><br>
+    
+    {%else%}
+    <h2 style="font-weight:normal">Reservations in your school</h2>
+    <form action="/reservations" method="POST">
+        <h2 style="font-weight:normal">Filters</h2>
+        <div>
+             <p>First name:<br><input name="first_name_filter"></p>
+             <p>Last name:<br><input name="last_name_filter"></p>
+             <input type="submit" value="Apply filters" class="btn btn-primary">
+        </div>
+        <br>
+      <table border=1 class = "table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Book title</th>
+            <th>ISBN</th>
+            <th>Begin Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in reservations %}
+          <tr>
+            <td>{{x['username']}}</td>
+            <td>{{x['first_name']}}</td>
+            <td>{{x['last_name']}}</td>
+            <td>{{ x['title'] }}</td>
+            <td>{{ x['ISBN'] }}</td>
+            <td>{{ x['begin_date'] }}</td>
+            <td>{{ x['end_date'] }}</td>
+          
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form><br>
+
+    {%endif%}
+    <a href='/index'>Back</a><br>
+  </center>
+  

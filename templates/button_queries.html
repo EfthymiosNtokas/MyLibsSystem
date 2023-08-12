@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MyLibs</title>
+      <link href="/static/css/bootstrap.css" rel="stylesheet">
+   </head>
+   
+   <body>
+      <div class="container">
+         <div class="text-center">
+            <h2>Miscellaneous stats</h2>
+            <div style="padding-top: 2rem">
+               <form action="/button_queries" method="POST">
+                  <p>Find young teachers (age < 40 years) who have borrowed the most books and the number of books <input type="radio" name="query" value="query_3_1_3" class="form-check-input green-radio"></p>
+                  <p>Find authors whose books have not been borrowed <input name="query" type="radio" value="query_3_1_4" class="form-check-input green-radio"></p>
+                  <p>Find top 3 category pairs in borrowed books <input name="query" type="radio" value="query_3_1_6" class="form-check-input green-radio"></p>
+                  <p>Find all authors who have written at least 5 books less than the author with the most books <input name="query" type="radio" value="query_3_1_7" class="form-check-input green-radio"></p>
+                  <br><br>
+                  <input type="submit" value="Show results" class="btn btn-outline-primary"><br></br>
+                  {% if selected_query == 'query_3_1_3' %}
+                  <div id="query_3_1_3">
+                     <table border=1 class="table">
+                        <tr>
+                           <th>Teacher Name</th>
+                           <th>Total Borrowed</th>
+                        </tr>
+                        {% for r in result %}
+                        <tr>
+                           <td>{{ r['teacher_names'] }}</td>
+                           <td>{{ r['total_borrowed'] }}</td>
+                        </tr>
+                        {% endfor %}
+                     </table>
+                  </div>
+                  {% elif selected_query == 'query_3_1_4' %}
+                  <div id="query_3_1_4">
+                     <table border=1 class="table">
+                        <tr>
+                           <th>Author Name</th>
+                        </tr>
+                        {% for r in result %}
+                        <tr>
+                           <td>{{ r['author_name'] }}</td>
+                        </tr>
+                        {% endfor %}
+                     </table>
+                  </div>
+                  {% elif selected_query == 'query_3_1_7' %}
+                  <div id="query_3_1_7">
+                     <table border=1 class="table">
+                        <tr>
+                           <th>Author Name</th>
+                           <th>Book Count</th>
+                        </tr>
+                        {% for r in result %}
+                        <tr>
+                           <td>{{ r['author_name'] }}</td>
+                           <td>{{ r['book_count'] }}</td>
+                        </tr>
+                        {% endfor %}
+                     </table>
+                  </div>
+                  {% elif selected_query == 'query_3_1_6' %}
+                  <div id="query_3_1_6">
+                     <table border=1 class="table">
+                        <tr>
+                           <th>Category Pair</th>
+                           <th>Borrowed Count</th>
+                        </tr>
+                        {% for r in result %}
+                        <tr>
+                           <td>{{ r['category_pair'] }}</td>
+                           <td>{{ r['borrowed_count'] }}</td>
+                        </tr>
+                        {% endfor %}
+                     </table>
+                  </div>
+                  {% else %}
+                  <p>No query selected</p>
+                  {% endif %}
+               </form>
+               <a href="/index" class="btn btn-link">Back</a>
+            </div>
+         </div>
+         
+      </div>
+      <script src="/static/js/bootstrap.bundle.js"></script>
+      <style>
+         .green-radio {
+           outline: 2px solid black;
+         }
+   </body>
+</html>

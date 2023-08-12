@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="\static\css\bootstrap.css" rel="stylesheet">
+</head>
+<div class="container text-center">
+  <div class="row justify-content-md-center">
+    <div class="col">
+
+    </div>
+    <div class="col-md-auto">
+      <h2>Welcome to myLibs</h2>
+      <div style="padding-top: 2rem" class="mb-3">
+        <h5 style="font-weight: normal">Please enter your credentials</h5>
+        <form action="/login" method="POST">
+          <label for="exampleFormControlInput1" class="form-label">Username</label>
+          <input required type="username" name="username" placeholder="Username" class="form-control"
+            id="exampleFormControlInput1">
+
+          <label for="exampleFormControlInput1" class="form-label">Password</label>
+          <input required type="password" name="password" placeholder="Password" class="form-control"
+            id="exampleFormControlInput1">
+          <div class="d-grid gap-2">
+            <input type="submit" value="Log in" class="btn btn-primary mb-3" style="margin-top: 2rem">
+          </div>
+        </form>
+      </div>
+      <p>Don't have an account? Register <a href='/register' class="link-primary">here</a><br></p>
+
+
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+
+</div>
+
+</html>

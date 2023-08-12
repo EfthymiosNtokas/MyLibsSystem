@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyLibs</title>
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container text-center">
+    <div class="row justify-content-md-center">
+      <div class="col">
+
+      </div>
+      <div class="col-md-auto">
+        
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flashes">
+          {% for category, message in messages %}
+          {% if category == 'error' %}
+          <div class="flash-error">{{ message }}</div>
+          {% else %}
+          <div class="flash-message">{{ message }}</div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <h2 style="font-weight: normal">Welcome to myLibs</h2>
+        <h3 style="font-weight: normal">Register Below</h3>
+
+        <div style="padding-top: 2rem">
+          <form action="/register" method="POST">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input required type="text" name="username" placeholder="Username" class="form-control" id="username">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input required type="password" name="password" placeholder="Password" class="form-control" id="password">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input required type="email" name="email" placeholder="johndoe@gmail.com" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+              <label for="firstname" class="form-label">First Name</label>
+              <input required type="text" name="firstname" placeholder="John" class="form-control" id="firstname">
+            </div>
+            <div class="mb-3">
+              <label for="lastname" class="form-label">Last Name</label>
+              <input required type="text" name="lastname" placeholder="Doe" class="form-control" id="lastname">
+            </div>
+            <div class="mb-3">
+              <label for="dateofbirth" class="form-label">Date of Birth</label>
+              <input required type="date" name="dateofbirth" class="form-control" id="dateofbirth">
+            </div>
+            <div class="mb-3">
+              <label for="schools" class="form-label">School</label>
+              <select id="schools" name="school" class="form-control">
+                {% for school in schools %}
+                <option value="{{ school }}">{{ school }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="usertype" class="form-label">Usertype</label>
+              <select id="usertype" name="usertype" class="form-control">
+                <option value="manager">Manager</option>
+                <option value="teacher">Teacher</option>
+                <option value="student">Student</option>
+              </select>
+            </div>
+            <div class="d-grid gap-2">
+              <input type="submit" value="Register" class="btn btn-primary mb-3">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+
+  <script src="static/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>
