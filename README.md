@@ -1,5 +1,5 @@
 # myLibs
-An implementation of a school library system for semester project on Databases, 6th semester ECE NTUA from Ntokas Eythymios 03120631, Platanos Charalampos 03120108 and Spyridon Galanopoulos 03120093
+An implementation of a school library system from Efthymios Ntokas, Harris Platanos, Spyrus Galanopoulos.
 
 ## Project Structure
 
